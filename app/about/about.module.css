@@ -1,0 +1,232 @@
+.aboutPage {
+  padding-top: 100px;
+  min-height: 100vh;
+}
+
+.heroSection {
+  padding: var(--space-5xl) 0 var(--space-3xl);
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.eyebrow {
+  font-size: var(--text-xs);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: var(--space-sm);
+  font-weight: 600;
+}
+
+.heroTitle {
+  font-size: var(--text-5xl);
+  font-weight: 300;
+  line-height: 1.15;
+  margin-bottom: var(--space-md);
+}
+
+.heroLead {
+  max-width: 680px;
+  margin: 0 auto;
+  font-size: var(--text-lg);
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+/* Split Row */
+.splitRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4xl);
+  align-items: center;
+}
+
+.imageCard {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--ground-raised);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.45);
+}
+
+.splitText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.sectionTag {
+  font-size: var(--text-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.sectionHeading {
+  font-size: var(--text-3xl);
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+.splitText p {
+  font-size: var(--text-base);
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+
+.splitText strong {
+  color: var(--ink);
+}
+
+/* Craft Section */
+.craftSection {
+  background: var(--ground-raised);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.centerHeader {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto var(--space-4xl);
+}
+
+.sectionSubtitle {
+  font-size: var(--text-base);
+  color: var(--ink-soft);
+  margin-top: var(--space-sm);
+  line-height: 1.6;
+}
+
+.processGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-lg);
+}
+
+.processStep {
+  background: var(--ground-field);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-xl);
+  position: relative;
+  transition: transform var(--duration-fast);
+}
+
+.processStep:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-hover);
+}
+
+.stepNum {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  color: var(--accent);
+  display: block;
+  margin-bottom: var(--space-sm);
+}
+
+.stepTitle {
+  font-size: var(--text-base);
+  font-weight: 500;
+  margin-bottom: var(--space-sm);
+  color: var(--ink);
+}
+
+.stepDesc {
+  font-size: var(--text-xs);
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+/* Values */
+.valuesCard {
+  background: var(--ground-field);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3xl) var(--space-2xl);
+}
+
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2xl);
+  text-align: center;
+}
+
+.valItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.valIcon {
+  font-size: 2rem;
+  margin-bottom: var(--space-xs);
+}
+
+.valItem h3 {
+  font-size: var(--text-xl);
+  font-weight: 400;
+  color: var(--ink);
+}
+
+.valItem p {
+  font-size: var(--text-sm);
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+/* CTA */
+.ctaSection {
+  padding: var(--space-5xl) 0;
+  text-align: center;
+}
+
+.ctaTitle {
+  font-size: var(--text-4xl);
+  font-weight: 300;
+  margin-bottom: var(--space-sm);
+}
+
+.ctaText {
+  max-width: 500px;
+  margin: 0 auto var(--space-2xl);
+  font-size: var(--text-base);
+  color: var(--ink-soft);
+}
+
+.ctaActions {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+@media (max-width: 900px) {
+  .splitRow {
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+  .processGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .valuesGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+}
+
+@media (max-width: 600px) {
+  .processGrid {
+    grid-template-columns: 1fr;
+  }
+  .ctaActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

@@ -1,0 +1,135 @@
+.collectionsPage {
+  padding-top: 100px;
+  padding-bottom: var(--space-5xl);
+  min-height: 100vh;
+}
+
+.heroSection {
+  padding: var(--space-4xl) 0 var(--space-3xl);
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+}
+
+.eyebrow {
+  font-size: var(--text-xs);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: var(--space-sm);
+  font-weight: 600;
+}
+
+.heroTitle {
+  font-size: var(--text-5xl);
+  font-weight: 300;
+  margin-bottom: var(--space-md);
+}
+
+.heroDesc {
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: var(--text-base);
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+.listSection {
+  padding-top: var(--space-4xl);
+}
+
+.collectionGrid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5xl);
+}
+
+.collectionCard {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4xl);
+  align-items: center;
+}
+
+.reverse {
+  direction: rtl;
+}
+
+.reverse .textCol {
+  direction: ltr;
+}
+
+.reverse .imageCol {
+  direction: ltr;
+}
+
+.imageCol {
+  position: relative;
+}
+
+.imageContainer {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--ground-raised);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.colImg {
+  transition: transform var(--duration-slow) var(--ease-out);
+}
+
+.imageContainer:hover .colImg {
+  transform: scale(1.04);
+}
+
+.colBadge {
+  position: absolute;
+  top: var(--space-md);
+  left: var(--space-md);
+  background: rgba(10, 10, 10, 0.8);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border);
+  color: var(--accent);
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  z-index: 2;
+}
+
+.textCol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.colSub {
+  font-size: var(--text-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.colTitle {
+  font-size: var(--text-3xl);
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+.colText {
+  font-size: var(--text-base);
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+
+@media (max-width: 900px) {
+  .collectionCard, .reverse {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    direction: ltr;
+  }
+}
