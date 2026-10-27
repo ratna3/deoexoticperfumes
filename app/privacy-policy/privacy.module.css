@@ -1,0 +1,75 @@
+.privacyPage {
+  padding: 120px 0 80px;
+  background-color: var(--color-bg, #0c0b0a);
+  color: var(--color-text, #f5f0eb);
+}
+
+.header {
+  border-bottom: 1px solid var(--color-border, #2a2620);
+  padding-bottom: var(--space-xl, 40px);
+  margin-bottom: var(--space-xl, 40px);
+}
+
+.title {
+  font-family: var(--font-serif, "Cinzel", "Playfair Display", Georgia, serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 400;
+  color: #ffffff;
+  margin-bottom: 12px;
+}
+
+.updated {
+  color: var(--color-accent, #d4af37);
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.content {
+  max-width: 800px;
+  line-height: 1.8;
+  color: var(--color-text-muted, #c4bcaf);
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.section h2 {
+  font-family: var(--font-serif, "Cinzel", Georgia, serif);
+  font-size: 1.35rem;
+  color: #ffffff;
+  border-left: 3px solid var(--color-accent, #d4af37);
+  padding-left: 14px;
+  margin: 0;
+}
+
+.section p {
+  margin: 0;
+}
+
+.section ul {
+  padding-left: 20px;
+  margin: 8px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contactBox {
+  background: var(--color-surface, #161412);
+  border: 1px solid var(--color-border, #2a2620);
+  border-radius: var(--radius-md, 8px);
+  padding: 24px;
+  margin-top: 16px;
+}
+
+.contactBox a {
+  color: var(--color-accent, #d4af37);
+  text-decoration: underline;
+}

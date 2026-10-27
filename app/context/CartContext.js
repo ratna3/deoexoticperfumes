@@ -41,16 +41,28 @@ export function CartProvider({ children }) {
   }, [showToast]);
 
   const removeItem = useCallback((id) => {
-    setItems(prev => prev.filter(i => i.id !== id));
-  }, []);
+    setItems(prev => {
+      const target = prev.find(i => i.id === id);
+      if (target) {
+        showToast(`${target.name} removed from cart`);
+      }
+      return prev.filter(i => i.id !== id);
+    });
+  }, [showToast]);
 
   const updateQuantity = useCallback((id, quantity) => {
     if (quantity <= 0) {
-      setItems(prev => prev.filter(i => i.id !== id));
+      setItems(prev => {
+        const target = prev.find(i => i.id === id);
+        if (target) {
+          showToast(`${target.name} removed from cart`);
+        }
+        return prev.filter(i => i.id !== id);
+      });
       return;
     }
     setItems(prev => prev.map(i => i.id === id ? { ...i, quantity } : i));
-  }, []);
+  }, [showToast]);
 
   const clearCart = useCallback(() => {
     setItems([]);

@@ -1,24 +1,44 @@
-'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
 import { ProductCard } from './components/ProductCard';
-import { getFeaturedProducts, products } from './data/products';
-import { useReveal } from './hooks/useReveal';
+import { RevealWrapper } from './components/RevealWrapper';
+import { getDbProducts } from './lib/db';
 import styles from './page.module.css';
 
-export default function Home() {
-  const featured = getFeaturedProducts();
-  const revealRef = useReveal();
+export const metadata = {
+  title: 'Handcrafted Luxury Attars & Exotic Perfumes',
+  description: 'Experience pure, alcohol-free Indian attars, rare oud perfumes, and natural dhoop cones hydro-distilled in traditional copper degs by Deo Exotic.',
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: 'Deo Exotic Attar & Perfume — Handcrafted Luxury Fragrances',
+    description: 'Handcrafted attars, rare oud flacons, and artisan dhoop cones distilled through centuries-old Indian tradition.',
+    url: 'https://deoexoticperfumes.vercel.app',
+    images: [
+      {
+        url: '/images/Treasure-box.png',
+        width: 1200,
+        height: 630,
+        alt: 'Deo Exotic Handcrafted Luxury Fragrances and Crystal Flacons',
+      },
+    ],
+  },
+};
+
+export default async function Home() {
+  const allProducts = await getDbProducts();
+  const featured = allProducts.filter((p) => p.featured || p.badge === 'Bestseller');
+  const remaining = allProducts.filter((p) => !featured.some((f) => f.id === p.id));
 
   return (
-    <div ref={revealRef}>
+    <RevealWrapper>
       {/* ── Hero ──────────────────────────────────────── */}
       <section className={styles.hero} id="hero">
         <div className={styles.heroBackground}>
           <Image
             src="/images/Treasure-box.png"
-            alt="Handcrafted treasure chest with crystal attar decanters"
+            alt="Handcrafted luxury velvet-lined treasure chest containing crystal flacons of pure attar oil"
             fill
             priority
             sizes="100vw"
@@ -37,10 +57,10 @@ export default function Home() {
               through centuries-old tradition. Every drop, a legacy.
             </p>
             <div className={`${styles.heroActions} reveal reveal-delay-2`}>
-              <Link href="/shop" className="btn btn-primary">
+              <Link href="/shop" className="btn btn-primary" id="hero-explore-collection">
                 Explore the Collection
               </Link>
-              <Link href="/about" className="btn btn-ghost">
+              <Link href="/about" className="btn btn-ghost" id="hero-our-story">
                 Our Story
               </Link>
             </div>
@@ -58,9 +78,9 @@ export default function Home() {
         <div className="container">
           <div className={styles.valuesGrid}>
             {[
-              { number: '100%', label: 'Pure & Natural', desc: 'Zero chemicals, zero synthetics. Only nature\'s finest ingredients.' },
-              { number: '500+', label: 'Years of Tradition', desc: 'Ancient deg-bhapka distillation methods preserved through generations.' },
-              { number: '40+', label: 'Exotic Blends', desc: 'Each fragrance crafted from rare botanicals sourced worldwide.' },
+              { number: '100%', label: 'Pure & Natural', desc: 'Zero alcohol, zero chemical additives. Only nature\'s most noble botanicals.' },
+              { number: '500+', label: 'Years of Tradition', desc: 'Ancient deg-bhapka copper hydro-distillation preserved across generations.' },
+              { number: '40+', label: 'Exotic Formulations', desc: 'Each flacon cured in aged kupis with rare resins sourced from Kannauj and beyond.' },
             ].map((v, i) => (
               <div key={i} className={`${styles.valueItem} reveal reveal-delay-${i + 1}`}>
                 <span className={styles.valueNumber}>{v.number}</span>
@@ -76,8 +96,8 @@ export default function Home() {
       <section className="section" id="featured-products">
         <div className="container">
           <div className={`${styles.sectionHeader} reveal`}>
-            <h2 className={styles.sectionTitle}>Our Finest</h2>
-            <Link href="/shop" className="btn btn-ghost">View all</Link>
+            <h2 className={styles.sectionTitle}>Our Master Distillations</h2>
+            <Link href="/shop" className="btn btn-ghost">View All Fragrances</Link>
           </div>
 
           <div className={styles.productGrid}>
@@ -94,10 +114,11 @@ export default function Home() {
           <div className={`${styles.craftImage} reveal`}>
             <Image
               src="/images/exotic-box.png"
-              alt="Attar collection in handcrafted box with five ornate vials"
+              alt="Artisan coffret gift box containing five rare perfume flacons by Deo Exotic"
               width={600}
               height={600}
               sizes="(max-width: 768px) 100vw, 50vw"
+              loading="lazy"
               style={{ objectFit: 'cover', width: '100%', height: 'auto' }}
             />
           </div>
@@ -116,7 +137,7 @@ export default function Home() {
               forward a tradition that dates back to the Mughal era. Every bottle is a
               testament to patience: some blends take over three days to distill.
             </p>
-            <Link href="/about" className="btn btn-secondary reveal reveal-delay-3">
+            <Link href="/about" className="btn btn-secondary reveal reveal-delay-3" id="home-discover-heritage">
               Discover Our Heritage
             </Link>
           </div>
@@ -127,44 +148,41 @@ export default function Home() {
       <section className="section" id="more-products">
         <div className="container">
           <div className={`${styles.sectionHeader} reveal`}>
-            <h2 className={styles.sectionTitle}>Complete Collection</h2>
+            <h2 className={styles.sectionTitle}>Complete Vault Collection</h2>
+            <Link href="/collections" className="btn btn-ghost">Explore Curations</Link>
           </div>
 
           <div className={styles.productGrid}>
-            {products.slice(4).map((product, i) => (
+            {(remaining.length > 0 ? remaining : allProducts).slice(0, 4).map((product, i) => (
               <ProductCard key={product.id} product={product} index={i} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── Newsletter / CTA ─────────────────────────── */}
+      {/* ── Newsletter / Atelier Concierge ─────────────────────────── */}
       <section className={`${styles.cta} section`} id="newsletter">
         <div className="container">
           <div className={`${styles.ctaInner} reveal`}>
             <h2 className={styles.ctaTitle}>
-              Join the Inner Circle
+              Join the Deo Exotic Circle
             </h2>
             <p className={styles.ctaDesc}>
-              Be the first to know about new arrivals, limited editions, and exclusive offers.
+              Receive private invitations to limited seasonal distillations, rare reserve flacons, and bespoke perfume advice.
             </p>
             <form
               className={styles.ctaForm}
-              onSubmit={(e) => {
-                e.preventDefault();
-                const email = e.target.email.value;
-                if (email) {
-                  window.location.href = `mailto:deoexoticattalko@gmail.com?subject=Newsletter Subscription&body=Please add me to your mailing list. My email: ${email}`;
-                }
-              }}
+              action={`mailto:deoexoticattalko@gmail.com`}
+              method="GET"
             >
               <input
                 type="email"
-                name="email"
-                placeholder="Your email address"
+                name="body"
+                placeholder="Enter your email for private reserves"
                 className="input"
                 required
                 id="newsletter-email"
+                aria-label="Email address for fragrance newsletter"
               />
               <button type="submit" className="btn btn-primary" id="newsletter-submit">
                 Subscribe
@@ -173,6 +191,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </div>
+    </RevealWrapper>
   );
 }

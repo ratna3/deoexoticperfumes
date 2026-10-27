@@ -37,7 +37,7 @@ export function Navbar() {
         <Link href="/" className={styles.logo} id="nav-logo">
           <Image
             src="/images/brand-logo.png"
-            alt="Deo Exotic Attar & Perfume"
+            alt="Deo Exotic Attar & Perfume royal emblem logo"
             width={48}
             height={48}
             priority
@@ -54,13 +54,17 @@ export function Navbar() {
         </ul>
 
         <div className={styles.actions}>
-          <Link href="/cart" className={styles.cartBtn} id="nav-cart" aria-label="View cart">
+          <Link href="/cart" className={styles.cartBtn} id="nav-cart" aria-label="View shopping cart">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
               <line x1="3" y1="6" x2="21" y2="6"/>
               <path d="M16 10a4 4 0 01-8 0"/>
             </svg>
-            {totalItems > 0 && <span className="cart-count">{totalItems}</span>}
+            {totalItems > 0 && (
+              <span key={totalItems} className={styles.cartBadge} aria-label={`${totalItems} items in cart`}>
+                {totalItems}
+              </span>
+            )}
           </Link>
 
           <button

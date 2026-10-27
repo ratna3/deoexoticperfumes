@@ -1,0 +1,185 @@
+/* Luxury Shimmer Skeleton for Deo Exotic */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-surface, #1b1916);
+  border-radius: var(--radius-sm, 6px);
+}
+
+.skeleton::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-100%);
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(212, 175, 55, 0.08) 20%,
+    rgba(255, 255, 255, 0.12) 50%,
+    rgba(212, 175, 55, 0.08) 80%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shimmer 1.8s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Product Card Skeleton */
+.cardSkeleton {
+  background: var(--color-surface, #161412);
+  border: 1px solid var(--color-border, #2a2620);
+  border-radius: var(--radius-md, 8px);
+  padding: var(--space-md, 16px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+}
+
+.imageSkeleton {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-sm, 6px);
+}
+
+.badgeSkeleton {
+  width: 70px;
+  height: 20px;
+  border-radius: 999px;
+  margin-bottom: 4px;
+}
+
+.titleSkeleton {
+  width: 80%;
+  height: 22px;
+  border-radius: 4px;
+}
+
+.notesSkeleton {
+  width: 60%;
+  height: 14px;
+  border-radius: 4px;
+}
+
+.footerSkeleton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-border, #2a2620);
+}
+
+.priceSkeleton {
+  width: 80px;
+  height: 20px;
+  border-radius: 4px;
+}
+
+.btnSkeleton {
+  width: 100px;
+  height: 38px;
+  border-radius: var(--radius-sm, 6px);
+}
+
+/* Product Grid Skeleton */
+.gridSkeleton {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-lg, 24px);
+  width: 100%;
+}
+
+/* Product Detail Skeleton */
+.detailSkeleton {
+  padding: 120px 0 60px;
+}
+
+.detailGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl, 40px);
+  margin-top: var(--space-lg, 24px);
+}
+
+@media (max-width: 768px) {
+  .detailGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.detailHeroImg {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-md, 8px);
+}
+
+.detailThumbRow {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.detailThumb {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-sm, 6px);
+}
+
+.detailInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.breadcrumbSkeleton {
+  width: 220px;
+  height: 16px;
+  margin-bottom: 24px;
+}
+
+.largeTitleSkeleton {
+  width: 75%;
+  height: 36px;
+}
+
+.taglineSkeleton {
+  width: 90%;
+  height: 18px;
+}
+
+.descBlockSkeleton {
+  width: 100%;
+  height: 80px;
+}
+
+.sizePillsRow {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.sizePillSkeleton {
+  width: 90px;
+  height: 42px;
+  border-radius: var(--radius-sm, 6px);
+}
+
+.ctaRowSkeleton {
+  display: flex;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.ctaBtnSkeleton {
+  flex: 1;
+  height: 48px;
+  border-radius: var(--radius-sm, 6px);
+}

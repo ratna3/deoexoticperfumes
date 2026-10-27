@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useCart } from '../context/CartContext';
 import { formatPrice } from '../data/products';
+import { Breadcrumbs } from '../components/Breadcrumbs';
 import styles from './cart.module.css';
 
 export default function CartPage() {
@@ -63,9 +64,16 @@ export default function CartPage() {
     );
   }
 
+  const breadcrumbs = [
+    { label: 'Home', href: '/' },
+    { label: 'Shop', href: '/shop' },
+    { label: 'Fragrance Vault Cart' },
+  ];
+
   return (
     <div className={styles.cartPage}>
       <div className="container">
+        <Breadcrumbs items={breadcrumbs} />
         <h1 className={styles.pageTitle}>Your Fragrance Vault</h1>
         <p className={styles.pageSubtitle}>
           Review your chosen attars and reserve perfumes before bespoke packaging.
@@ -101,7 +109,7 @@ export default function CartPage() {
                   <div className={styles.itemImage}>
                     <Image
                       src={item.image || '/images/Royal-bottle.png'}
-                      alt={item.name}
+                      alt={`${item.name} — Handcrafted Flacon Selection`}
                       fill
                       sizes="90px"
                       style={{ objectFit: 'cover' }}

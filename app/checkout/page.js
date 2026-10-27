@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useCart } from '../context/CartContext';
 import { formatPrice } from '../data/products';
+import { Breadcrumbs } from '../components/Breadcrumbs';
 import styles from './checkout.module.css';
 
 export default function CheckoutPage() {
@@ -145,7 +146,7 @@ export default function CheckoutPage() {
     return (
       <div className={styles.emptyNotice}>
         <div className="container">
-          <h2>Your bag is currently empty</h2>
+          <h1 className={styles.title}>Your Bag is Currently Empty</h1>
           <p>Please select your fragrances before proceeding to checkout.</p>
           <Link href="/shop" className="btn btn-primary" style={{ marginTop: 'var(--space-md)' }}>
             Browse Collection
@@ -155,9 +156,16 @@ export default function CheckoutPage() {
     );
   }
 
+  const breadcrumbs = [
+    { label: 'Home', href: '/' },
+    { label: 'Cart', href: '/cart' },
+    { label: 'Secure Checkout' },
+  ];
+
   return (
     <div className={styles.checkoutPage}>
       <div className="container">
+        <Breadcrumbs items={breadcrumbs} />
         <h1 className={styles.title}>Bespoke Checkout</h1>
         <p className={styles.subtitle}>
           Secure checkout for authentic non-alcoholic attars and perfumes.
@@ -352,7 +360,7 @@ export default function CheckoutPage() {
                     <div className={styles.itemImg}>
                       <Image
                         src={item.image || '/images/Royal-bottle.png'}
-                        alt={item.name}
+                        alt={`${item.name} — Luxury Flacon`}
                         fill
                         sizes="60px"
                         style={{ objectFit: 'cover' }}

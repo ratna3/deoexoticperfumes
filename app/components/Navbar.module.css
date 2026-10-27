@@ -92,6 +92,35 @@
   color: var(--ink);
 }
 
+.cartBadge {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  background: var(--accent, #d4af37);
+  color: #0c0b0a;
+  font-size: 0.7rem;
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  animation: badgePop 240ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes badgePop {
+  0% {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 /* Burger */
 .burger {
   display: none;

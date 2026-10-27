@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { products, formatPrice } from '../../data/products';
 import { ProductCard } from '../../components/ProductCard';
 import { useCart } from '../../context/CartContext';
+import { Breadcrumbs } from '../../components/Breadcrumbs';
 import styles from './product.module.css';
 
 export default function ProductDetailClient({ product }) {
@@ -62,19 +63,18 @@ export default function ProductDetailClient({ product }) {
     router.push('/checkout');
   };
 
+  const breadcrumbs = [
+    { label: 'Home', href: '/' },
+    { label: 'Shop', href: '/shop' },
+    { label: product.category, href: `/shop?category=${encodeURIComponent(product.category)}` },
+    { label: product.name },
+  ];
+
   return (
     <div className={styles.productPage}>
       <div className="container">
         {/* Breadcrumb */}
-        <nav className={styles.breadcrumb} aria-label="Breadcrumb">
-          <Link href="/">Home</Link>
-          <span className={styles.divider}>/</span>
-          <Link href="/shop">Shop</Link>
-          <span className={styles.divider}>/</span>
-          <Link href={`/shop?category=${encodeURIComponent(product.category)}`}>{product.category}</Link>
-          <span className={styles.divider}>/</span>
-          <span className={styles.current}>{product.name}</span>
-        </nav>
+        <Breadcrumbs items={breadcrumbs} />
 
         <div className={styles.grid}>
           {/* Gallery */}
@@ -82,7 +82,7 @@ export default function ProductDetailClient({ product }) {
             <div className={styles.mainImageWrapper}>
               <Image
                 src={selectedImage}
-                alt={product.name}
+                alt={`${product.name} — Luxury handcrafted ${product.category} flacon`}
                 fill
                 priority
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -100,9 +100,16 @@ export default function ProductDetailClient({ product }) {
                     type="button"
                     className={`${styles.thumbnailBtn} ${selectedImage === img ? styles.activeThumbnail : ''}`}
                     onClick={() => setSelectedImage(img)}
-                    aria-label={`View photo ${i + 1}`}
+                    aria-label={`View photo ${i + 1} of ${product.name}`}
                   >
-                    <Image src={img} alt="" fill sizes="80px" style={{ objectFit: 'cover' }} />
+                    <Image
+                      src={img}
+                      alt={`${product.name} detailed flacon photo ${i + 1}`}
+                      fill
+                      loading="lazy"
+                      sizes="80px"
+                      style={{ objectFit: 'cover' }}
+                    />
                   </button>
                 ))}
               </div>

@@ -1,15 +1,41 @@
-'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
+import { Breadcrumbs } from '../components/Breadcrumbs';
 import styles from './about.module.css';
 
+export const metadata = {
+  title: 'Our Heritage & The Deg-Bhapka Craft | Deo Exotic',
+  description: 'Discover the centuries-old history of Deo Exotic Attar & Perfume. Traditional deg-bhapka copper hydro-distillation in Kannauj with zero alcohol, synthetic binders, or shortcuts.',
+  alternates: {
+    canonical: '/about',
+  },
+  openGraph: {
+    title: 'Our Heritage & The Deg-Bhapka Craft | Deo Exotic',
+    description: 'Ancient artistry meets modern luxury. The story of Indian hydro-distillation and pure perfume oils.',
+    url: 'https://deoexoticperfumes.vercel.app/about',
+    images: [
+      {
+        url: '/images/Treasure-box.png',
+        width: 1200,
+        height: 630,
+        alt: 'Deo Exotic Distillation Heritage and Artisanal Treasure Chest',
+      },
+    ],
+  },
+};
+
 export default function AboutPage() {
+  const breadcrumbs = [
+    { label: 'Home', href: '/' },
+    { label: 'Our Story & Heritage' },
+  ];
+
   return (
     <div className={styles.aboutPage}>
       {/* Hero */}
       <section className={styles.heroSection}>
         <div className="container">
+          <Breadcrumbs items={breadcrumbs} />
           <span className={styles.eyebrow}>The House of Deo Exotic</span>
           <h1 className={styles.heroTitle}>A Symphony of Ancient Fire,<br />Water & Sacred Woods</h1>
           <p className={styles.heroLead}>
@@ -26,7 +52,7 @@ export default function AboutPage() {
               <div className={styles.imageCard}>
                 <Image
                   src="/images/Treasure-box.png"
-                  alt="Deo Exotic artisanal treasure chest"
+                  alt="Deo Exotic artisanal treasure chest with crystal flacons and pure ittar oils"
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
                   style={{ objectFit: 'cover' }}
@@ -131,10 +157,10 @@ export default function AboutPage() {
             Step away from mass-manufactured fragrances. Discover your personal olfactory signature with Deo Exotic.
           </p>
           <div className={styles.ctaActions}>
-            <Link href="/shop" className="btn btn-primary">
+            <Link href="/shop" className="btn btn-primary" id="about-explore-fragrances">
               Explore Our Fragrances
             </Link>
-            <Link href="/contact" className="btn btn-ghost">
+            <Link href="/contact" className="btn btn-ghost" id="about-bespoke-consultation">
               Bespoke Consultation
             </Link>
           </div>

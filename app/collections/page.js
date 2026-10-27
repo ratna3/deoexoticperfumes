@@ -1,8 +1,28 @@
-'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
+import { Breadcrumbs } from '../components/Breadcrumbs';
 import styles from './collections.module.css';
+
+export const metadata = {
+  title: 'Curated Fragrance Collections | Deo Exotic',
+  description: 'Explore our master collections: The Imperial Oud Series, Artisanal Keepsake Coffrets, Vedic Temple Dhoop, and The Grand Shamama distillations. Pure and alcohol-free.',
+  alternates: {
+    canonical: '/collections',
+  },
+  openGraph: {
+    title: 'Curated Fragrance Collections | Deo Exotic',
+    description: 'Distinct chapters in the royal history of Indian and Oriental perfumery, distilled with uncompromising purity.',
+    url: 'https://deoexoticperfumes.vercel.app/collections',
+    images: [
+      {
+        url: '/images/Treasure-box.png',
+        width: 1200,
+        height: 630,
+        alt: 'Deo Exotic Curated Fragrance Collections',
+      },
+    ],
+  },
+};
 
 const collections = [
   {
@@ -17,8 +37,8 @@ const collections = [
   {
     id: 'keepsake-coffrets',
     title: 'Artisanal Keepsake Coffrets',
-    subtitle: 'Hand-Carved Rosewood & Marble Caskets',
-    description: 'Masterpieces of North Indian decorative craftsmanship. Each chest is handcrafted by Saharanpur woodcarvers with pure brass inlay and velvet lining, housing crystal decanters filled with our most prized reserve attars.',
+    subtitle: 'Hand-Carved Rosewood & Velvet Caskets',
+    description: 'Masterpieces of North Indian decorative craftsmanship. Each chest is handcrafted by master artisans with pure brass inlay and velvet lining, housing crystal decanters filled with our most prized reserve attars.',
     image: '/images/Treasure-box.png',
     link: '/shop?category=Gift+Sets',
     tag: 'Collector Heirlooms'
@@ -44,10 +64,16 @@ const collections = [
 ];
 
 export default function CollectionsPage() {
+  const breadcrumbs = [
+    { label: 'Home', href: '/' },
+    { label: 'Curated Collections' },
+  ];
+
   return (
     <div className={styles.collectionsPage}>
       <section className={styles.heroSection}>
         <div className="container">
+          <Breadcrumbs items={breadcrumbs} />
           <span className={styles.eyebrow}>Curated Distillations</span>
           <h1 className={styles.heroTitle}>Our Olfactory Collections</h1>
           <p className={styles.heroDesc}>
@@ -65,8 +91,9 @@ export default function CollectionsPage() {
                   <div className={styles.imageContainer}>
                     <Image
                       src={col.image}
-                      alt={col.title}
+                      alt={`${col.title} — ${col.subtitle}, Deo Exotic Collection`}
                       fill
+                      loading={index === 0 ? 'eager' : 'lazy'}
                       sizes="(max-width: 768px) 100vw, 50vw"
                       style={{ objectFit: 'cover' }}
                       className={styles.colImg}
@@ -79,7 +106,7 @@ export default function CollectionsPage() {
                   <span className={styles.colSub}>{col.subtitle}</span>
                   <h2 className={styles.colTitle}>{col.title}</h2>
                   <p className={styles.colText}>{col.description}</p>
-                  <Link href={col.link} className="btn btn-primary" style={{ alignSelf: 'flex-start' }}>
+                  <Link href={col.link} className="btn btn-primary" style={{ alignSelf: 'flex-start' }} id={`explore-${col.id}`}>
                     Explore Collection →
                   </Link>
                 </div>
