@@ -5,6 +5,7 @@ import { RevealWrapper } from './components/RevealWrapper';
 import { DiffusionText } from '@/components/ui/diffusion-text';
 import { ScrollEncryptedText } from '@/components/ui/scroll-encrypted-text';
 import { ParallaxGrid } from '@/components/ui/parallax-grid';
+import { FragranceFinderForm } from '@/components/finder/fragrance-finder-form';
 import { getDbProducts } from './lib/db';
 import styles from './page.module.css';
 
@@ -115,6 +116,9 @@ export default async function Home() {
           </ParallaxGrid>
         </div>
       </section>
+
+      {/* ── Custom Interactive Fragrance Finder & Packaging Form ── */}
+      <FragranceFinderForm />
 
       {/* ── The Craft Split Section ──────────────────── */}
       <section className={`${styles.craft} section`} id="the-craft">

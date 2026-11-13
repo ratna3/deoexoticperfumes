@@ -10,6 +10,7 @@ import { useCart } from '../../context/CartContext';
 import { Breadcrumbs } from '../../components/Breadcrumbs';
 import { DiffusionText } from '@/components/ui/diffusion-text';
 import { ScrollEncryptedText } from '@/components/ui/scroll-encrypted-text';
+import { NotesAccordion } from '@/components/ui/notes-accordion';
 import styles from './product.module.css';
 
 export default function ProductDetailClient({ product }) {
@@ -203,21 +204,7 @@ export default function ProductDetailClient({ product }) {
 
             {/* Olfactory Notes Pyramid */}
             {product.notes && (
-              <div className={styles.pyramidCard}>
-                <h3 className={styles.pyramidTitle}>Olfactory Notes Composition</h3>
-                <div className={styles.noteItem}>
-                  <span className={styles.noteLabel}>Head Notes:</span>
-                  <span className={styles.noteContent}>{product.notes.top}</span>
-                </div>
-                <div className={styles.noteItem}>
-                  <span className={styles.noteLabel}>Heart Notes:</span>
-                  <span className={styles.noteContent}>{product.notes.heart}</span>
-                </div>
-                <div className={styles.noteItem}>
-                  <span className={styles.noteLabel}>Base Notes:</span>
-                  <span className={styles.noteContent}>{product.notes.base}</span>
-                </div>
-              </div>
+              <NotesAccordion notes={product.notes} />
             )}
 
             {/* Highlights Grid */}
