@@ -71,6 +71,15 @@ export function DeviceProvider({ children }) {
     // Motion scale
     const motionScale = reducedMotion ? 0 : computeMotionScale(width, isTV);
 
+    // Reflect capabilities on root html for CSS targeting
+    if (document.documentElement) {
+      document.documentElement.dataset.device = breakpoint;
+      document.documentElement.dataset.input = input;
+      document.documentElement.dataset.tv = isTV ? 'true' : 'false';
+      document.documentElement.dataset.posture = posture;
+      document.documentElement.dataset.reducedMotion = reducedMotion ? 'true' : 'false';
+    }
+
     setDeviceProfile(prev => ({
       ...prev,
       breakpoint,
@@ -124,13 +133,18 @@ export function DeviceProvider({ children }) {
         battery.addEventListener('chargingchange', checkBattery);
       }).catch(() => {});
     } else if (typeof navigator !== 'undefined' && navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2) {
-      setDeviceProfile(prev => ({ ...prev, lowPower: true }));
+      const timer = setTimeout(() => {
+        setDeviceProfile(prev => ({ ...prev, lowPower: true }));
+      }, 0);
+      return () => clearTimeout(timer);
     }
   }, []);
 
   // Listen to resize, orientation changes, and foldable events
   useEffect(() => {
-    updateProfile();
+    const initTimer = setTimeout(() => {
+      updateProfile();
+    }, 0);
 
     let resizeTimer;
     const handleResize = () => {
@@ -162,6 +176,7 @@ export function DeviceProvider({ children }) {
     motionMedia.addEventListener('change', handleMotionChange);
 
     return () => {
+      clearTimeout(initTimer);
       clearTimeout(resizeTimer);
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('orientationchange', handleResize);

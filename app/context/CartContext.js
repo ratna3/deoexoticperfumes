@@ -5,17 +5,17 @@ import { createContext, useContext, useState, useCallback, useEffect } from 'rea
 const CartContext = createContext();
 
 export function CartProvider({ children }) {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const saved = localStorage.getItem('deo-exotic-cart');
+        if (saved) return JSON.parse(saved);
+      } catch {}
+    }
+    return [];
+  });
   const [toastMessage, setToastMessage] = useState('');
   const [isCartOpen, setIsCartOpen] = useState(false);
-
-  // Load cart from localStorage on mount
-  useEffect(() => {
-    const saved = localStorage.getItem('deo-exotic-cart');
-    if (saved) {
-      try { setItems(JSON.parse(saved)); } catch {}
-    }
-  }, []);
 
   // Save cart to localStorage on change
   useEffect(() => {

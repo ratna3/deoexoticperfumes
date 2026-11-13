@@ -289,7 +289,7 @@ export default function ProductDetailClient({ product }) {
               {product.reviews.map((rev, i) => (
                 <div key={i} className={styles.reviewCard}>
                   <div className={styles.stars}>★★★★★</div>
-                  <p className={styles.reviewComment}>"{rev.comment}"</p>
+                  <p className={styles.reviewComment}>&ldquo;{rev.comment}&rdquo;</p>
                   <div className={styles.reviewAuthor}>
                     <strong>{rev.author}</strong> • <span>Verified Connoisseur</span>
                   </div>

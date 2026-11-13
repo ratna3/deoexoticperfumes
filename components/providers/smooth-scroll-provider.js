@@ -37,8 +37,11 @@ export function SmoothScrollProvider({ children }) {
     });
 
     lenisRef.current = lenis;
-    setLenisInstance(lenis);
     if (typeof window !== 'undefined') window.__lenis = lenis;
+
+    const timer = setTimeout(() => {
+      setLenisInstance(lenis);
+    }, 0);
 
     // Drive Lenis from Motion's frame ticker
     const updateRaf = (data) => {
@@ -49,6 +52,7 @@ export function SmoothScrollProvider({ children }) {
     frame.update(updateRaf, true);
 
     return () => {
+      clearTimeout(timer);
       cancelFrame(updateRaf);
       lenis.destroy();
       lenisRef.current = null;

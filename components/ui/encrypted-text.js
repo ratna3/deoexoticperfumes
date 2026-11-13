@@ -18,12 +18,10 @@ export function EncryptedText({
   onComplete,
 }) {
   const [displayText, setDisplayText] = useState(text);
-  const [isRevealing, setIsRevealing] = useState(false);
   const frameRef = useRef(null);
 
   useEffect(() => {
     if (!trigger) {
-      setDisplayText(text);
       return;
     }
 
@@ -50,12 +48,10 @@ export function EncryptedText({
         frameRef.current = setTimeout(tick, interval);
       } else {
         setDisplayText(text);
-        setIsRevealing(false);
         if (onComplete) onComplete();
       }
     };
 
-    setIsRevealing(true);
     frameRef.current = setTimeout(tick, interval);
 
     return () => {
