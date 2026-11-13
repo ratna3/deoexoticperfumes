@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Breadcrumbs } from '../components/Breadcrumbs';
+import { DiffusionText } from '@/components/ui/diffusion-text';
+import { ScrollEncryptedText } from '@/components/ui/scroll-encrypted-text';
 import styles from './about.module.css';
 
 export const metadata = {
@@ -37,10 +39,14 @@ export default function AboutPage() {
         <div className="container">
           <Breadcrumbs items={breadcrumbs} />
           <span className={styles.eyebrow}>The House of Deo Exotic</span>
-          <h1 className={styles.heroTitle}>A Symphony of Ancient Fire,<br />Water & Sacred Woods</h1>
-          <p className={styles.heroLead}>
-            Where centuries of royal perfumery heritage converge with uncompromising modern discernment.
-          </p>
+          <DiffusionText as="h1" className={styles.heroTitle}>
+            A Symphony of Ancient Fire, Water & Sacred Woods
+          </DiffusionText>
+          <ScrollEncryptedText
+            text="Where centuries of royal perfumery heritage converge with uncompromising modern discernment."
+            className={styles.heroLead}
+            delay={0.2}
+          />
         </div>
       </section>
 

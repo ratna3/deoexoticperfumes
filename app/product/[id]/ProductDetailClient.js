@@ -8,6 +8,8 @@ import { products, formatPrice } from '../../data/products';
 import { ProductCard } from '../../components/ProductCard';
 import { useCart } from '../../context/CartContext';
 import { Breadcrumbs } from '../../components/Breadcrumbs';
+import { DiffusionText } from '@/components/ui/diffusion-text';
+import { ScrollEncryptedText } from '@/components/ui/scroll-encrypted-text';
 import styles from './product.module.css';
 
 export default function ProductDetailClient({ product }) {
@@ -119,8 +121,14 @@ export default function ProductDetailClient({ product }) {
           {/* Details */}
           <div className={styles.details}>
             <span className={styles.category}>{product.category}</span>
-            <h1 className={styles.title}>{product.name}</h1>
-            <p className={styles.tagline}>{product.tagline || product.description}</p>
+            <DiffusionText as="h1" className={styles.title}>
+              {product.name}
+            </DiffusionText>
+            <ScrollEncryptedText
+              text={product.tagline || product.description}
+              className={styles.tagline}
+              delay={0.15}
+            />
 
             <div className={styles.priceRow}>
               <span className={styles.price}>{formatPrice(currentPrice)}</span>

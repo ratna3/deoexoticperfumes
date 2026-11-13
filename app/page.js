@@ -2,6 +2,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ProductCard } from './components/ProductCard';
 import { RevealWrapper } from './components/RevealWrapper';
+import { DiffusionText } from '@/components/ui/diffusion-text';
+import { ScrollEncryptedText } from '@/components/ui/scroll-encrypted-text';
+import { ParallaxGrid } from '@/components/ui/parallax-grid';
 import { getDbProducts } from './lib/db';
 import styles from './page.module.css';
 
@@ -49,13 +52,14 @@ export default async function Home() {
 
         <div className={`${styles.heroContent} container`}>
           <div className={styles.heroText}>
-            <h1 className={`${styles.heroTitle} reveal`}>
-              The Art of<br />Pure Fragrance
-            </h1>
-            <p className={`${styles.heroSub} reveal reveal-delay-1`}>
-              Handcrafted attars and exotic perfumes distilled
-              through centuries-old tradition. Every drop, a legacy.
-            </p>
+            <DiffusionText as="h1" className={styles.heroTitle} delay={0.1}>
+              The Art of Pure Fragrance
+            </DiffusionText>
+            <ScrollEncryptedText
+              text="Handcrafted attars and exotic perfumes distilled through centuries-old tradition. Every drop, a legacy."
+              className={styles.heroSub}
+              delay={0.3}
+            />
             <div className={`${styles.heroActions} reveal reveal-delay-2`}>
               <Link href="/shop" className="btn btn-primary" id="hero-explore-collection">
                 Explore the Collection
@@ -84,7 +88,9 @@ export default async function Home() {
             ].map((v, i) => (
               <div key={i} className={`${styles.valueItem} reveal reveal-delay-${i + 1}`}>
                 <span className={styles.valueNumber}>{v.number}</span>
-                <h3 className={styles.valueLabel}>{v.label}</h3>
+                <DiffusionText as="h3" className={styles.valueLabel} blurLevel="body">
+                  {v.label}
+                </DiffusionText>
                 <p className={styles.valueDesc}>{v.desc}</p>
               </div>
             ))}
@@ -96,15 +102,17 @@ export default async function Home() {
       <section className="section" id="featured-products">
         <div className="container">
           <div className={`${styles.sectionHeader} reveal`}>
-            <h2 className={styles.sectionTitle}>Our Master Distillations</h2>
+            <DiffusionText as="h2" className={styles.sectionTitle}>
+              Our Master Distillations
+            </DiffusionText>
             <Link href="/shop" className="btn btn-ghost">View All Fragrances</Link>
           </div>
 
-          <div className={styles.productGrid}>
+          <ParallaxGrid className={styles.productGrid} amplitude={25}>
             {featured.slice(0, 4).map((product, i) => (
               <ProductCard key={product.id} product={product} index={i} />
             ))}
-          </div>
+          </ParallaxGrid>
         </div>
       </section>
 
@@ -123,20 +131,19 @@ export default async function Home() {
             />
           </div>
           <div className={styles.craftText}>
-            <h2 className={`${styles.craftTitle} reveal`}>
-              Distilled by Hand,<br />Worn with Pride
-            </h2>
-            <p className={`${styles.craftDesc} reveal reveal-delay-1`}>
-              Each attar in our collection is distilled using the traditional
-              deg-bhapka method — a centuries-old technique where flowers, herbs, and woods
-              are slow-cooked in copper stills over sandalwood oil. No alcohol. No shortcuts.
-              Just the pure essence of nature, concentrated into a single, precious drop.
-            </p>
-            <p className={`${styles.craftDesc} reveal reveal-delay-2`}>
-              Our artisans in Kannauj — the perfume capital of India — carry
-              forward a tradition that dates back to the Mughal era. Every bottle is a
-              testament to patience: some blends take over three days to distill.
-            </p>
+            <DiffusionText as="h2" className={styles.craftTitle}>
+              Distilled by Hand, Worn with Pride
+            </DiffusionText>
+            <ScrollEncryptedText
+              text="Each attar in our collection is distilled using the traditional deg-bhapka method — a centuries-old technique where flowers, herbs, and woods are slow-cooked in copper stills over sandalwood oil. No alcohol. No shortcuts. Just the pure essence of nature, concentrated into a single, precious drop."
+              className={styles.craftDesc}
+              delay={0.15}
+            />
+            <ScrollEncryptedText
+              text="Our artisans in Kannauj — the perfume capital of India — carry forward a tradition that dates back to the Mughal era. Every bottle is a testament to patience: some blends take over three days to distill."
+              className={styles.craftDesc}
+              delay={0.25}
+            />
             <Link href="/about" className="btn btn-secondary reveal reveal-delay-3" id="home-discover-heritage">
               Discover Our Heritage
             </Link>
@@ -148,15 +155,17 @@ export default async function Home() {
       <section className="section" id="more-products">
         <div className="container">
           <div className={`${styles.sectionHeader} reveal`}>
-            <h2 className={styles.sectionTitle}>Complete Vault Collection</h2>
+            <DiffusionText as="h2" className={styles.sectionTitle}>
+              Complete Vault Collection
+            </DiffusionText>
             <Link href="/collections" className="btn btn-ghost">Explore Curations</Link>
           </div>
 
-          <div className={styles.productGrid}>
+          <ParallaxGrid className={styles.productGrid} amplitude={25}>
             {(remaining.length > 0 ? remaining : allProducts).slice(0, 4).map((product, i) => (
               <ProductCard key={product.id} product={product} index={i} />
             ))}
-          </div>
+          </ParallaxGrid>
         </div>
       </section>
 
@@ -164,12 +173,13 @@ export default async function Home() {
       <section className={`${styles.cta} section`} id="newsletter">
         <div className="container">
           <div className={`${styles.ctaInner} reveal`}>
-            <h2 className={styles.ctaTitle}>
+            <DiffusionText as="h2" className={styles.ctaTitle}>
               Join the Deo Exotic Circle
-            </h2>
-            <p className={styles.ctaDesc}>
-              Receive private invitations to limited seasonal distillations, rare reserve flacons, and bespoke perfume advice.
-            </p>
+            </DiffusionText>
+            <ScrollEncryptedText
+              text="Receive private invitations to limited seasonal distillations, rare reserve flacons, and bespoke perfume advice."
+              className={styles.ctaDesc}
+            />
             <form
               className={styles.ctaForm}
               action={`mailto:deoexoticattalko@gmail.com`}

@@ -3,6 +3,8 @@
 import { useState, useMemo, useTransition } from 'react';
 import { ProductCard } from '../components/ProductCard';
 import { Breadcrumbs } from '../components/Breadcrumbs';
+import { DiffusionText } from '@/components/ui/diffusion-text';
+import { ScrollEncryptedText } from '@/components/ui/scroll-encrypted-text';
 import { useReveal } from '../hooks/useReveal';
 import styles from './shop.module.css';
 
@@ -66,11 +68,14 @@ export function ShopClient({ initialProducts = [], categories = ['All'], initial
       <section className={styles.header}>
         <div className="container">
           <Breadcrumbs items={breadcrumbItems} />
-          <h1 className={`${styles.title} reveal`}>Handcrafted Fragrances & Pure Attars</h1>
-          <p className={`${styles.subtitle} reveal reveal-delay-1`}>
-            Every formulation in our vault is hydro-distilled using centuries-old methods.
-            Browse our pure attars, rare perfumes, natural dhoop cones, and artisan gift sets.
-          </p>
+          <DiffusionText as="h1" className={styles.title}>
+            Handcrafted Fragrances & Pure Attars
+          </DiffusionText>
+          <ScrollEncryptedText
+            text="Every formulation in our vault is hydro-distilled using centuries-old methods. Browse our pure attars, rare perfumes, natural dhoop cones, and artisan gift sets."
+            className={styles.subtitle}
+            delay={0.2}
+          />
         </div>
       </section>
 
