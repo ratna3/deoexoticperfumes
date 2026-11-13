@@ -118,9 +118,23 @@ export default function CartPage() {
 
                   <div className={styles.itemInfo}>
                     <h3 className={styles.itemName}>
-                      <Link href={`/product/${item.id.split('-')[0]}`}>{item.name}</Link>
+                      {item.isCustomBundle ? (
+                        <span>{item.name}</span>
+                      ) : (
+                        <Link href={`/product/${item.id.split('-')[0]}`}>{item.name}</Link>
+                      )}
                     </h3>
                     <span className={styles.itemCategory}>{item.category}</span>
+                    {item.packagingTier && (
+                      <span style={{ display: 'block', fontSize: '0.8rem', color: 'var(--accent)', marginTop: '2px' }}>
+                        Presentation: {item.packagingTier}
+                      </span>
+                    )}
+                    {item.curatedAttars && (
+                      <span style={{ display: 'block', fontSize: '0.75rem', color: 'var(--ink-muted)', marginTop: '2px' }}>
+                        Curated: {item.curatedAttars.join(', ')}
+                      </span>
+                    )}
                     {item.selectedSize && <span className={styles.itemSize}>Volume: {item.selectedSize}</span>}
                     <button
                       type="button"

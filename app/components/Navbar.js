@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useCart } from '../context/CartContext';
+import { CartDrawer } from '@/components/cart/cart-drawer';
 import styles from './Navbar.module.css';
 
 export function Navbar() {
@@ -54,7 +55,13 @@ export function Navbar() {
         </ul>
 
         <div className={styles.actions}>
-          <Link href="/cart" className={styles.cartBtn} id="nav-cart" aria-label="View shopping cart">
+          <button
+            type="button"
+            onClick={() => setIsCartOpen(true)}
+            className={styles.cartBtn}
+            id="nav-cart"
+            aria-label="View shopping cart drawer"
+          >
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
               <line x1="3" y1="6" x2="21" y2="6"/>
@@ -65,7 +72,7 @@ export function Navbar() {
                 {totalItems}
               </span>
             )}
-          </Link>
+          </button>
 
           <button
             className={`${styles.burger} ${mobileOpen ? styles.burgerOpen : ''}`}
@@ -80,6 +87,9 @@ export function Navbar() {
 
       {/* Mobile overlay */}
       {mobileOpen && <div className={styles.overlay} onClick={() => setMobileOpen(false)} />}
+
+      {/* Premium Olfactory Cart Drawer Sheet */}
+      <CartDrawer />
     </header>
   );
 }
