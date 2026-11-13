@@ -4,6 +4,8 @@ import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { CartProvider } from './context/CartContext';
 import { Toast } from './components/Toast';
+import { DeviceProvider } from '@/components/providers/device-provider';
+import { SmoothScrollProvider } from '@/components/providers/smooth-scroll-provider';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://deoexoticperfumes.vercel.app';
 const gaId = process.env.NEXT_PUBLIC_GA_ID || 'G-DEOEXOTIC01';
@@ -125,12 +127,18 @@ export default function RootLayout({ children }) {
           }}
         />
 
-        <CartProvider>
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-          <Toast />
-        </CartProvider>
+        <DeviceProvider>
+          <SmoothScrollProvider>
+            <CartProvider>
+              {/* Static 0.02 opacity fixed film grain overlay */}
+              <div className="film-grain-overlay" aria-hidden="true" />
+              <Navbar />
+              <main>{children}</main>
+              <Footer />
+              <Toast />
+            </CartProvider>
+          </SmoothScrollProvider>
+        </DeviceProvider>
       </body>
     </html>
   );
