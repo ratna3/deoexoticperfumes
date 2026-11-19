@@ -3,7 +3,6 @@ import Script from 'next/script';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { CartProvider } from './context/CartContext';
-import { Toast } from './components/Toast';
 import { DeviceProvider } from '@/components/providers/device-provider';
 import { SmoothScrollProvider } from '@/components/providers/smooth-scroll-provider';
 
@@ -135,7 +134,6 @@ export default function RootLayout({ children }) {
               <Navbar />
               <main>{children}</main>
               <Footer />
-              <Toast />
             </CartProvider>
           </SmoothScrollProvider>
         </DeviceProvider>

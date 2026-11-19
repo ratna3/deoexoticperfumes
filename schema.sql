@@ -35,10 +35,14 @@ CREATE TABLE IF NOT EXISTS orders (
     customer_phone VARCHAR(50),
     shipping_address TEXT NOT NULL,
     total_amount NUMERIC(10, 2) NOT NULL,
+    payment_method VARCHAR(50) NOT NULL DEFAULT 'cod',
     status VARCHAR(50) DEFAULT 'Pending',
     items_json JSONB NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
+
+ALTER TABLE orders
+ADD COLUMN IF NOT EXISTS payment_method VARCHAR(50) NOT NULL DEFAULT 'cod';
 
 CREATE TABLE IF NOT EXISTS inquiries (
     id SERIAL PRIMARY KEY,

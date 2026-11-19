@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getDbProducts, createDbOrder } from '../../lib/db';
+import { PAYMENT_METHODS } from '../../data/payment-methods';
+import { products as staticProducts } from '../../data/products';
 import { ATTARS, BASE_ATTAR_PRICE, PACKAGING_TIERS } from '../../../lib/data/scents';
 
 const MAX_ORDER_ITEMS = 50;
@@ -36,7 +38,7 @@ export async function POST(request) {
       );
     }
 
-    const { customerName, customerEmail, customerPhone, shippingAddress, items, totalAmount } = body;
+    const { customerName, customerEmail, customerPhone, shippingAddress, items, totalAmount, paymentMethod } = body;
 
     if (
       !isValidText(customerName, 120) ||
@@ -44,6 +46,7 @@ export async function POST(request) {
       !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customerEmail) ||
       !isValidText(shippingAddress, 1000) ||
       (customerPhone !== undefined && (typeof customerPhone !== 'string' || customerPhone.length > 30)) ||
+      !PAYMENT_METHODS.some((method) => method.id === paymentMethod) ||
       !Array.isArray(items) ||
       items.length === 0 ||
       items.length > MAX_ORDER_ITEMS ||
@@ -58,6 +61,7 @@ export async function POST(request) {
 
     const catalog = await getDbProducts();
     const productsById = new Map(catalog.map((product) => [String(product.id), product]));
+    const staticProductsById = new Map(staticProducts.map((product) => [String(product.id), product]));
     const attarsById = new Map(ATTARS.map((attar) => [attar.id, attar]));
     const normalizedItems = [];
 
@@ -116,7 +120,8 @@ export async function POST(request) {
         );
       }
 
-      const sizes = Array.isArray(product.sizes) ? product.sizes : [];
+      const staticProduct = staticProductsById.get(String(product.id));
+      const sizes = Array.isArray(product.sizes) ? product.sizes : staticProduct?.sizes || [];
       let variant = null;
       if (item.size !== undefined) {
         if (typeof item.size !== 'string' || item.size.length > 80) {
@@ -167,6 +172,7 @@ export async function POST(request) {
       customerEmail: customerEmail.trim(),
       customerPhone,
       shippingAddress: shippingAddress.trim(),
+      paymentMethod,
       items: normalizedItems,
       totalAmount: calculatedTotal,
     });
@@ -175,6 +181,7 @@ export async function POST(request) {
       success: true,
       orderId: orderResult.orderId,
       totalAmount: calculatedTotal,
+      paymentMethod,
       message: 'Order placed successfully. Thank you for choosing Deo Exotic Attar & Perfume.',
       contactEmail: 'deoexoticattalko@gmail.com'
     });

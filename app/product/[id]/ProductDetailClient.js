@@ -15,7 +15,7 @@ import styles from './product.module.css';
 
 export default function ProductDetailClient({ product }) {
   const router = useRouter();
-  const { addItem } = useCart();
+  const { addItem, setIsCartOpen } = useCart();
 
   const [selectedSize, setSelectedSize] = useState(
     product?.sizes?.[0] || { size: product?.size || '6ml', price: product?.price || 1999 }
@@ -46,11 +46,13 @@ export default function ProductDetailClient({ product }) {
     addItem({
       ...product,
       id: `${product.id}-${selectedSize.size}`,
+      productId: product.id,
       name: `${product.name} (${selectedSize.size})`,
       price: currentPrice,
       selectedSize: selectedSize.size,
     }, quantity);
 
+    setIsCartOpen(true);
     setAddedAnim(true);
     setTimeout(() => setAddedAnim(false), 1800);
   };

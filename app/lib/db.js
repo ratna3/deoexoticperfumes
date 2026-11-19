@@ -69,7 +69,7 @@ export async function createDbOrder(orderData) {
   if (sql) {
     try {
       await sql`
-        INSERT INTO orders (id, customer_name, customer_email, customer_phone, shipping_address, total_amount, status, items_json)
+        INSERT INTO orders (id, customer_name, customer_email, customer_phone, shipping_address, total_amount, payment_method, status, items_json)
         VALUES (
           ${orderId},
           ${orderData.customerName},
@@ -77,6 +77,7 @@ export async function createDbOrder(orderData) {
           ${orderData.customerPhone || ''},
           ${orderData.shippingAddress},
           ${orderData.totalAmount},
+          ${orderData.paymentMethod},
           'Pending',
           ${JSON.stringify(orderData.items)}
         )

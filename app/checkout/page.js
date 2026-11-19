@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useCart } from '../context/CartContext';
 import { formatPrice } from '../data/products';
+import { PAYMENT_METHODS } from '../data/payment-methods';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 import styles from './checkout.module.css';
 
@@ -52,9 +53,10 @@ export default function CheckoutPage() {
           customerName: form.fullName,
           customerEmail: form.email,
           customerPhone: form.phone,
+          paymentMethod: form.paymentMethod,
           shippingAddress: `${form.address}, ${form.apartment ? form.apartment + ', ' : ''}${form.city}, ${form.state} - ${form.pincode}`,
           items: items.map(i => ({
-            id: i.id,
+            id: i.productId || i.id,
             name: i.name,
             size: i.selectedSize || i.size,
             price: i.price,
@@ -75,24 +77,14 @@ export default function CheckoutPage() {
           email: form.email,
           address: `${form.address}, ${form.city} (${form.pincode})`,
           total: data.totalAmount,
-          method: form.paymentMethod.toUpperCase()
+          method: PAYMENT_METHODS.find((method) => method.id === data.paymentMethod)?.label || 'UPI'
         });
         clearCart();
       } else {
         setErrorMsg(data.message || 'Failed to place order. Please try again.');
       }
-    } catch (err) {
-      // In case of network glitch, generate client confirmation
-      const fallbackId = 'DEO-' + Math.floor(100000 + Math.random() * 900000);
-      setOrderComplete({
-        orderId: fallbackId,
-        name: form.fullName,
-        email: form.email,
-        address: `${form.address}, ${form.city} (${form.pincode})`,
-        total: totalPrice,
-        method: form.paymentMethod.toUpperCase()
-      });
-      clearCart();
+    } catch {
+      setErrorMsg('Unable to reach checkout. Your order was not placed; please try again.');
     } finally {
       setLoading(false);
     }
@@ -298,48 +290,28 @@ export default function CheckoutPage() {
             <section className={styles.sectionBlock}>
               <h2 className={styles.sectionHeading}>3. Payment Preference</h2>
               <div className={styles.paymentOptions}>
-                <label className={`${styles.paymentCard} ${form.paymentMethod === 'upi' ? styles.paymentSelected : ''}`}>
-                  <input
-                    type="radio"
-                    name="paymentMethod"
-                    value="upi"
-                    checked={form.paymentMethod === 'upi'}
-                    onChange={handleChange}
-                  />
-                  <div className={styles.paymentInfo}>
-                    <strong>Instant UPI / QR Code (GPay, PhonePe, Paytm)</strong>
-                    <span>Fastest dispatch & automated confirmation</span>
-                  </div>
-                </label>
-
-                <label className={`${styles.paymentCard} ${form.paymentMethod === 'card' ? styles.paymentSelected : ''}`}>
-                  <input
-                    type="radio"
-                    name="paymentMethod"
-                    value="card"
-                    checked={form.paymentMethod === 'card'}
-                    onChange={handleChange}
-                  />
-                  <div className={styles.paymentInfo}>
-                    <strong>Credit / Debit Card & NetBanking</strong>
-                    <span>Encrypted 256-bit bank-grade gateway</span>
-                  </div>
-                </label>
-
-                <label className={`${styles.paymentCard} ${form.paymentMethod === 'cod' ? styles.paymentSelected : ''}`}>
-                  <input
-                    type="radio"
-                    name="paymentMethod"
-                    value="cod"
-                    checked={form.paymentMethod === 'cod'}
-                    onChange={handleChange}
-                  />
-                  <div className={styles.paymentInfo}>
-                    <strong>Cash on Delivery (Pan-India)</strong>
-                    <span>Pay in cash or UPI at your doorstep upon arrival</span>
-                  </div>
-                </label>
+                {PAYMENT_METHODS.map((method) => (
+                  <label
+                    key={method.id}
+                    className={`${styles.paymentCard} ${form.paymentMethod === method.id ? styles.paymentSelected : ''}`}
+                  >
+                    <input
+                      type="radio"
+                      name="paymentMethod"
+                      value={method.id}
+                      checked={form.paymentMethod === method.id}
+                      onChange={handleChange}
+                    />
+                    <div className={styles.paymentInfo}>
+                      <strong>{method.label}</strong>
+                      <span>{method.description}</span>
+                    </div>
+                  </label>
+                ))}
               </div>
+              <p className={styles.paymentNotice}>
+                UPI, card, and Netbanking are saved as payment preferences. Online payment processing is not enabled yet; Cash on Delivery is available.
+              </p>
             </section>
 
             <button

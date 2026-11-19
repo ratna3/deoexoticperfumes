@@ -14,18 +14,12 @@ export function CartProvider({ children }) {
     }
     return [];
   });
-  const [toastMessage, setToastMessage] = useState('');
   const [isCartOpen, setIsCartOpen] = useState(false);
 
   // Save cart to localStorage on change
   useEffect(() => {
     localStorage.setItem('deo-exotic-cart', JSON.stringify(items));
   }, [items]);
-
-  const showToast = useCallback((msg) => {
-    setToastMessage(msg);
-    setTimeout(() => setToastMessage(''), 3000);
-  }, []);
 
   const addItem = useCallback((product, quantity = 1) => {
     setItems(prev => {
@@ -37,32 +31,19 @@ export function CartProvider({ children }) {
       }
       return [...prev, { ...product, quantity }];
     });
-    showToast(`${product.name} added to cart`);
-  }, [showToast]);
+  }, []);
 
   const removeItem = useCallback((id) => {
-    setItems(prev => {
-      const target = prev.find(i => i.id === id);
-      if (target) {
-        showToast(`${target.name} removed from cart`);
-      }
-      return prev.filter(i => i.id !== id);
-    });
-  }, [showToast]);
+    setItems(prev => prev.filter(i => i.id !== id));
+  }, []);
 
   const updateQuantity = useCallback((id, quantity) => {
     if (quantity <= 0) {
-      setItems(prev => {
-        const target = prev.find(i => i.id === id);
-        if (target) {
-          showToast(`${target.name} removed from cart`);
-        }
-        return prev.filter(i => i.id !== id);
-      });
+      setItems(prev => prev.filter(i => i.id !== id));
       return;
     }
     setItems(prev => prev.map(i => i.id === id ? { ...i, quantity } : i));
-  }, [showToast]);
+  }, []);
 
   const clearCart = useCallback(() => {
     setItems([]);
@@ -80,7 +61,6 @@ export function CartProvider({ children }) {
       clearCart,
       totalItems,
       totalPrice,
-      toastMessage,
       isCartOpen,
       setIsCartOpen,
     }}>
