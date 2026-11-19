@@ -87,9 +87,9 @@ export function FragranceFinderForm() {
     setDisplayLimit(12);
   };
 
-  // Filter attars in real time only after at least two nodes are selected.
+  // Filter attars in real time once at least one node is selected.
   const matchingAttars = useMemo(() => {
-    if (!activeArchetype || selectedNodes.length < 2) {
+    if (!activeArchetype || selectedNodes.length === 0) {
       return [];
     }
 
@@ -439,9 +439,9 @@ export function FragranceFinderForm() {
                     }}
                   >
                     {selectedNodes.length === 0
-                      ? '○ 0 nodes selected (pick at least 2 to blend)'
+                      ? '○ 0 nodes selected'
                       : selectedNodes.length === 1
-                      ? '◐ 1 node active • Select at least 1 more node to blend accords'
+                      ? '◐ 1 node active • Real-time formulations'
                       : `● ${selectedNodes.length} nodes blended • Real-time formulations`}
                   </div>
 
@@ -515,7 +515,7 @@ export function FragranceFinderForm() {
                 })}
               </div>
 
-              {selectedNodes.length < 2 && (
+              {selectedNodes.length === 0 && (
                 <div
                   style={{
                     marginTop: '20px',
@@ -530,9 +530,7 @@ export function FragranceFinderForm() {
                 >
                   <span style={{ color: 'var(--accent)', fontSize: '1.1rem' }}>✦</span>
                   <span style={{ fontSize: 'var(--text-xs)', color: 'var(--ink-soft)' }}>
-                    {selectedNodes.length === 0
-                      ? 'No perfumes are listed yet. Select at least 2 olfactory nodes above, and our formulations will diffuse here in real time.'
-                      : 'Select one more olfactory node to reveal matching formulations in real time.'}
+                    No perfumes are listed yet. Select an olfactory node above, and our formulations will diffuse here in real time.
                   </span>
                 </div>
               )}
@@ -566,7 +564,7 @@ export function FragranceFinderForm() {
 
         {/* ── STEP 3: REAL-TIME PERFUME RESULTS (Diffuses when nodes are selected) ── */}
         <AnimatePresence mode="wait">
-          {activeArchetype && selectedNodes.length >= 2 && (
+          {activeArchetype && selectedNodes.length >= 1 && (
             <motion.div
               key="perfume-results-container"
               initial={reducedMotion ? {} : { opacity: 0, y: 24, filter: 'blur(8px)' }}
