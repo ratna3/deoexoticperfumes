@@ -17,8 +17,9 @@ export async function GET(request) {
       }
     );
   } catch (error) {
+    console.error('Product catalogue request failed:', error);
     return NextResponse.json(
-      { success: false, error: error.message },
+      { success: false, error: 'Unable to load products right now.' },
       { status: 500 }
     );
   }

@@ -58,7 +58,10 @@ export default function CheckoutPage() {
             name: i.name,
             size: i.selectedSize || i.size,
             price: i.price,
-            quantity: i.quantity
+            quantity: i.quantity,
+            isCustomBundle: i.isCustomBundle,
+            curatedAttarIds: i.curatedAttarIds,
+            packagingTierId: i.packagingTierId
           })),
           totalAmount: totalPrice
         })
@@ -71,7 +74,7 @@ export default function CheckoutPage() {
           name: form.fullName,
           email: form.email,
           address: `${form.address}, ${form.city} (${form.pincode})`,
-          total: totalPrice,
+          total: data.totalAmount,
           method: form.paymentMethod.toUpperCase()
         });
         clearCart();
