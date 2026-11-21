@@ -21,6 +21,7 @@ export function Footer() {
           <p className={styles.tagline}>
             Ancient artistry, modern luxury. Every drop tells a story of tradition passed through generations.
           </p>
+          <p className={styles.businessName}>Deo Exotic Perfumers</p>
         </div>
 
         {/* Quick Links */}
