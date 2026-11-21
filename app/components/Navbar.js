@@ -38,9 +38,10 @@ export function Navbar() {
         <Link href="/" className={styles.logo} id="nav-logo">
           <Image
             src="/images/brand-logo.png"
-            alt="Deo Exotic Attar & Perfume royal emblem logo"
-            width={48}
-            height={48}
+            alt="Deo Exotic Perfumers royal emblem logo"
+            width={68}
+            height={44}
+            className={styles.logoImg}
             priority
           />
           <span className={styles.logoText}>Deo Exotic Perfumers</span>

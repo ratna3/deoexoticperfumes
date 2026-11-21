@@ -30,15 +30,37 @@
 }
 
 .businessName {
+  font-family: var(--font-logo), 'Cinzel', Georgia, serif;
   font-weight: 600;
-  font-size: var(--text-lg);
+  font-size: 1.15rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   color: var(--ink);
+  background: linear-gradient(135deg, #fdfbf7 0%, #ecd9ab 45%, #c4841d 85%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin: 0;
+  display: inline-block;
+  line-height: 1.25;
 }
 
 .logo {
   display: inline-flex;
   width: fit-content;
+  align-items: center;
+}
+
+.footerLogoImg {
+  height: 44px;
+  width: auto;
+  max-width: 66px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(196, 132, 29, 0.25));
+  transition: transform var(--duration-fast) ease;
+}
+
+.footerLogoImg:hover {
+  transform: scale(1.04);
 }
 
 .tagline {

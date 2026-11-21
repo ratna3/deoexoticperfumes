@@ -11,12 +11,13 @@ export function Footer() {
         {/* Brand column */}
         <div className={styles.brand}>
           <div className={styles.brandHeader}>
-            <Link href="/" className={styles.logo}>
+            <Link href="/" className={styles.logo} id="footer-logo">
               <Image
                 src="/images/brand-logo.png"
                 alt="Deo Exotic Perfumers"
-                width={40}
+                width={60}
                 height={40}
+                className={styles.footerLogoImg}
                 priority
               />
             </Link>

@@ -3,7 +3,7 @@
    A luxury dark-ground palette with amber/gold accent
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
 
 /* ── Tokens ─────────────────────────────────────────────── */
 :root {
@@ -28,6 +28,7 @@
   --border-hover: rgba(240, 235, 227, 0.15);
 
   /* Type */
+  --font-logo:    'Cinzel', 'Cormorant Garamond', Georgia, serif;
   --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-body:    'Inter', system-ui, -apple-system, sans-serif;
 
