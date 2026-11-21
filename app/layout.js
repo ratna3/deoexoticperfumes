@@ -12,10 +12,10 @@ const gaId = process.env.NEXT_PUBLIC_GA_ID || 'G-DEOEXOTIC01';
 export const metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'Deo Exotic Attar & Perfume — Handcrafted Luxury Fragrances',
-    template: '%s | Deo Exotic Attar & Perfume',
+    default: 'Deo Exotic Perfumers — Handcrafted Luxury Fragrances',
+    template: '%s | Deo Exotic Perfumers',
   },
-  description: 'Discover handcrafted attars, exotic perfumes, natural dhoop cones, and artisan gift sets from Deo Exotic. Centuries of Indian distillation heritage in every drop.',
+  description: 'Discover handcrafted attars, exotic perfumes, natural dhoop cones, and artisan gift sets from Deo Exotic Perfumers. Centuries of Indian distillation heritage in every drop.',
   keywords: [
     'attar',
     'pure ittar',
@@ -35,10 +35,10 @@ export const metadata = {
     canonical: '/',
   },
   openGraph: {
-    title: 'Deo Exotic Attar & Perfume — Handcrafted Luxury Fragrances',
+    title: 'Deo Exotic Perfumers — Handcrafted Luxury Fragrances',
     description: 'Centuries of Indian distillation heritage. Pure alcohol-free attars, rare perfumes, and exotic incense.',
     url: siteUrl,
-    siteName: 'Deo Exotic Attar & Perfume',
+    siteName: 'Deo Exotic Perfumers',
     images: [
       {
         url: '/images/Treasure-box.png',
@@ -52,7 +52,7 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Deo Exotic Attar & Perfume — Handcrafted Luxury Fragrances',
+    title: 'Deo Exotic Perfumers — Handcrafted Luxury Fragrances',
     description: 'Pure alcohol-free attars, rare perfumes, and exotic incense hydro-distilled in traditional copper degs.',
     images: ['/images/Treasure-box.png'],
   },
@@ -76,7 +76,7 @@ export default function RootLayout({ children }) {
   const organizationSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'Deo Exotic Attar & Perfume',
+    name: 'Deo Exotic Perfumers',
     alternateName: 'Deo Exotic',
     url: siteUrl,
     logo: `${siteUrl}/images/brand-logo.png`,
@@ -99,7 +99,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/images/favicon-logo.jpg" />
+        <link rel="icon" href="/exotic-logo.ico" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
