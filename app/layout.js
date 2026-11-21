@@ -100,6 +100,8 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <link rel="icon" href="/exotic-logo.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="/exotic-logo.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="/exotic-logo.ico" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}

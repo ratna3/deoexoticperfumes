@@ -17,6 +17,25 @@
   gap: var(--space-lg);
 }
 
+.brandHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.brandInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.businessName {
+  font-weight: 600;
+  font-size: var(--text-lg);
+  color: var(--ink);
+  margin: 0;
+}
+
 .logo {
   display: inline-flex;
   width: fit-content;

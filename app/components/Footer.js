@@ -10,18 +10,23 @@ export function Footer() {
       <div className={`${styles.inner} container`}>
         {/* Brand column */}
         <div className={styles.brand}>
-          <Link href="/" className={styles.logo}>
-            <Image
-              src="/images/brand-logo.png"
-              alt="Deo Exotic Perfumers"
-              width={56}
-              height={56}
-            />
-          </Link>
-          <p className={styles.tagline}>
-            Ancient artistry, modern luxury. Every drop tells a story of tradition passed through generations.
-          </p>
-          <p className={styles.businessName}>Deo Exotic Perfumers</p>
+          <div className={styles.brandHeader}>
+            <Link href="/" className={styles.logo}>
+              <Image
+                src="/images/brand-logo.png"
+                alt="Deo Exotic Perfumers"
+                width={40}
+                height={40}
+                priority
+              />
+            </Link>
+            <div className={styles.brandInfo}>
+              <p className={styles.businessName}>Deo Exotic Perfumers</p>
+              <p className={styles.tagline}>
+                Ancient artistry, modern luxury. Every drop tells a story of tradition passed through generations.
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Quick Links */}
