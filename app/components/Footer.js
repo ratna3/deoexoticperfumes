@@ -13,7 +13,7 @@ export function Footer() {
           <Link href="/" className={styles.logo}>
             <Image
               src="/images/brand-logo.png"
-              alt="Deo Exotic Attar & Perfume"
+              alt="Deo Exotic Perfumers"
               width={56}
               height={56}
             />
@@ -63,7 +63,7 @@ export function Footer() {
 
       <div className={styles.bottom}>
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
-          <p>© 2026 Deo Exotic Attar & Perfume. All rights reserved.</p>
+          <p>© 2026 Deo Exotic Perfumers. All rights reserved.</p>
           <div style={{ display: 'flex', gap: '16px', fontSize: '0.85rem' }}>
             <Link href="/privacy-policy" style={{ color: 'var(--color-text-muted)' }}>Privacy Policy</Link>
             <Link href="/shop" style={{ color: 'var(--color-text-muted)' }}>Vault Catalogue</Link>

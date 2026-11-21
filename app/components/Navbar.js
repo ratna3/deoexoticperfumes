@@ -43,7 +43,7 @@ export function Navbar() {
             height={48}
             priority
           />
-          <span className={styles.logoText}>Deo Exotic</span>
+          <span className={styles.logoText}>Deo Exotic Perfumers</span>
         </Link>
 
         <ul className={`${styles.links} ${mobileOpen ? styles.open : ''}`}>
